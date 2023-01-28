@@ -17,13 +17,12 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
-import persistReducer from "redux-persist/es/persistReducer";
 
 const persistConfig = { key: "root", storage, version: 1 };
-const persistReducer = persistReducer(persistConfig, authReducer);
+const persistedReducer = persistReducer(persistConfig, authReducer);
 const store = configureStore({
-	reducer: persistReducer,
-	middleware: (getDefaultMiddleware) => {
+	reducer: persistedReducer,
+	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: {
 				ignoreActions: [
@@ -35,8 +34,7 @@ const store = configureStore({
 					REGISTER,
 				],
 			},
-		});
-	},
+		}),
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
