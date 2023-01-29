@@ -71,6 +71,7 @@ const Form = () => {
 			}
 		);
 		const savedUser = await savedUserResponse.json();
+		console.log(savedUser);
 		onSubmitProps.resetForm();
 
 		if (savedUser) {
@@ -88,6 +89,7 @@ const Form = () => {
 			}
 		);
 		const loggedIn = await loggedInResponse.json();
+		console.log(loggedIn);
 		onSubmitProps.resetForm();
 		if (loggedIn) {
 			dispatch(

@@ -15,7 +15,6 @@ export const getUserFriends = async (req, res) => {
 	try {
 		const { id } = req.params;
 		const user = await User.findById(id);
-
 		const friends = await Promise.all(
 			user.friends.map((id) => User.findById(id))
 		);
@@ -63,6 +62,10 @@ export const addRemoveFriend = async (req, res) => {
 
 		await user.save();
 		await friend.save();
+
+		const friends = await Promise.all(
+			user.friends.map((id) => User.findById(id))
+		);
 
 		const formattedFriends = friends.map(
 			({
